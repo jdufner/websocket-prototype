@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class DoppeltBuilder {
+public class DoppeltBuilderSortedSet {
 
 	private int size = 0;
 	private int anzahlElements = 0;

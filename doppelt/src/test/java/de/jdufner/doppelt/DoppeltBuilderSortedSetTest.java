@@ -9,12 +9,11 @@ import java.util.TreeSet;
 
 import org.junit.Test;
 
-
-public class DoppeltBuilderTest {
+public class DoppeltBuilderSortedSetTest {
 
 	@Test
 	public void whenBuild2Expect3Tupel() {
-		final DoppeltBuilder builder = new DoppeltBuilder();
+		final DoppeltBuilderSortedSet builder = new DoppeltBuilderSortedSet();
 		Set<SortedSet<Integer>> tupels = buildResultTupels();
 		Set<SortedSet<Integer>> listOfTupel = builder.build(2);
 		assertEquals(tupels, listOfTupel);
@@ -36,27 +35,40 @@ public class DoppeltBuilderTest {
 		tupels.add(tupel3);
 		return tupels;
 	}
-	
-	
+
 	@Test
 	public void whenBuild3AndReduceExpectLinkedByOne() {
-		final DoppeltBuilder builder = new DoppeltBuilder();
+		final DoppeltBuilderSortedSet builder = new DoppeltBuilderSortedSet();
 		Set<SortedSet<Integer>> listOfTupel = builder.reduce(3);
 		assertEquals(7, listOfTupel.size());
 	}
-	
+
 	@Test
-	public void build8() {
-		final DoppeltBuilder builder = new DoppeltBuilder();
-		Set<SortedSet<Integer>> listOfTupel = builder.build(8);
+	public void build4() {
+		final DoppeltBuilderSortedSet builder = new DoppeltBuilderSortedSet();
+		Set<SortedSet<Integer>> listOfTupel = builder.build(4);
 		System.out.println(listOfTupel);
 	}
 	
 	@Test
+	public void reduce4() {
+		final DoppeltBuilderSortedSet builder = new DoppeltBuilderSortedSet();
+		Set<SortedSet<Integer>> listOfTupel = builder.reduce(4);
+		System.out.println(listOfTupel);
+	}
+	
+	@Test
+	public void build5() {
+		final DoppeltBuilderSortedSet builder = new DoppeltBuilderSortedSet();
+		Set<SortedSet<Integer>> listOfTupel = builder.build(5);
+		System.out.println(listOfTupel);
+	}
+
+	@Test
 	public void reduce5() {
-		final DoppeltBuilder builder = new DoppeltBuilder();
+		final DoppeltBuilderSortedSet builder = new DoppeltBuilderSortedSet();
 		Set<SortedSet<Integer>> listOfTupel = builder.reduce(5);
 		System.out.println(listOfTupel);
 	}
-	
+
 }
