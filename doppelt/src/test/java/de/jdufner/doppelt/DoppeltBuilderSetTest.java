@@ -5,20 +5,20 @@ import static org.junit.Assert.assertEquals;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
-
 
 public class DoppeltBuilderSetTest {
 
+	private DoppeltBuilder builder = null;
+	
+	@Before
+	public void setUp() {
+		builder = new DoppeltBuilderSet();
+	}
+	
 	@Test
 	public void whenBuild2Expect3Tupel() {
-		final DoppeltBuilderSet builder = new DoppeltBuilderSet();
-		Set<Set<Integer>> tupels = buildResultTupels();
-		Set<Set<Integer>> listOfTupel = builder.build(2);
-		assertEquals(tupels, listOfTupel);
-	}
-
-	private Set<Set<Integer>> buildResultTupels() {
 		Set<Integer> tupel1 = new HashSet<Integer>();
 		tupel1.add(1);
 		tupel1.add(2);
@@ -32,42 +32,49 @@ public class DoppeltBuilderSetTest {
 		tupels.add(tupel1);
 		tupels.add(tupel2);
 		tupels.add(tupel3);
-		return tupels;
+		Set<Set<Integer>> listOfTupel = builder.build(2);
+		assertEquals(tupels, listOfTupel);
 	}
-	
-	
+
 	@Test
 	public void whenBuild3AndReduceExpectLinkedByOne() {
-		final DoppeltBuilderSet builder = new DoppeltBuilderSet();
 		Set<Set<Integer>> listOfTupel = builder.reduce(3);
 		assertEquals(7, listOfTupel.size());
 	}
 	
 	@Test
 	public void build4() {
-		final DoppeltBuilderSet builder = new DoppeltBuilderSet();
 		Set<Set<Integer>> listOfTupel = builder.build(4);
 		System.out.println(listOfTupel);
 	}
 	
 	@Test
 	public void reduce4() {
-		final DoppeltBuilderSet builder = new DoppeltBuilderSet();
 		Set<Set<Integer>> listOfTupel = builder.reduce(4);
 		System.out.println(listOfTupel);
 	}
 	
 	@Test
 	public void build5() {
-		final DoppeltBuilderSet builder = new DoppeltBuilderSet();
 		Set<Set<Integer>> listOfTupel = builder.build(5);
 		System.out.println(listOfTupel);
 	}
 	
 	@Test
 	public void reduce5() {
-		final DoppeltBuilderSet builder = new DoppeltBuilderSet();
 		Set<Set<Integer>> listOfTupel = builder.reduce(5);
+		System.out.println(listOfTupel);
+	}
+	
+	@Test
+	public void build6() {
+		Set<Set<Integer>> listOfTupel = builder.build(6);
+		System.out.println(listOfTupel);
+	}
+	
+	@Test
+	public void reduce6() {
+		Set<Set<Integer>> listOfTupel = builder.reduce(6);
 		System.out.println(listOfTupel);
 	}
 	
