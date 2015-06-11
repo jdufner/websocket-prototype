@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class DoppeltBuilderSetTest {
@@ -67,12 +68,14 @@ public class DoppeltBuilderSetTest {
 	}
 	
 	@Test
+	@Ignore
 	public void build6() {
 		Set<Set<Integer>> listOfTupel = builder.build(6);
 		System.out.println(listOfTupel);
 	}
 	
 	@Test
+	@Ignore
 	public void reduce6() {
 		Set<Set<Integer>> listOfTupel = builder.reduce(6);
 		System.out.println(listOfTupel);

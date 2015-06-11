@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class DoppeltBuilderSortedSetTest {
@@ -68,12 +69,14 @@ public class DoppeltBuilderSortedSetTest {
 	}
 
 	@Test
+	@Ignore
 	public void build6() {
 		Set<Set<Integer>> listOfTupel = builder.build(6);
 		System.out.println(listOfTupel);
 	}
 	
 	@Test
+	@Ignore
 	public void reduce6() {
 		Set<Set<Integer>> listOfTupel = builder.reduce(6);
 		System.out.println(listOfTupel);
