@@ -10,19 +10,16 @@ public class DoppeltBuilderList2 {
 
   public Collection<Collection<Integer>> build(final int size) {
     Collection<Collection<Integer>> initialTupels = buildInitial(size);
-    Collection<Collection<Integer>> buildTupels = addMissingTupels(size,
-        initialTupels, new ArrayList<Collection<Integer>>());
+    Collection<Collection<Integer>> buildTupels = addMissingTupels(size, initialTupels, new ArrayList<Collection<Integer>>());
     return buildTupels;
   }
 
-  private Collection<Collection<Integer>> addMissingTupels(int size,
-      Collection<Collection<Integer>> initialTupels,
+  private Collection<Collection<Integer>> addMissingTupels(int size, Collection<Collection<Integer>> initialTupels,
       List<Collection<Integer>> buildTupels) {
     Collection<Collection<Integer>> testedTupels = new ArrayList<Collection<Integer>>();
     buildTupels.addAll(initialTupels);
     do {
-      Collection<Integer> tupel = buildNextTupel(size, buildTupels,
-          testedTupels, new ArrayList<Integer>());
+      Collection<Integer> tupel = buildNextTupel(size, buildTupels, testedTupels, new ArrayList<Integer>());
       if (tupel != null) {
         buildTupels.add(tupel);
         testedTupels.add(tupel);
@@ -37,14 +34,12 @@ public class DoppeltBuilderList2 {
     // return buildTupels;
   }
 
-  private Collection<Integer> buildNextTupel(int size,
-      Collection<Collection<Integer>> tupels,
+  private Collection<Integer> buildNextTupel(int size, Collection<Collection<Integer>> tupels,
       Collection<Collection<Integer>> testedTupels, List<Integer> currentTupel) {
     Collection<Integer> testedElements = new ArrayList<Integer>();
 
     do {
-      List<Integer> remainingElements = getRemainingElements(size, tupels,
-          currentTupel, testedElements);
+      List<Integer> remainingElements = getRemainingElements(size, tupels, currentTupel, testedElements);
       Integer nextElement = null;
       if (!remainingElements.isEmpty()) {
         nextElement = remainingElements.get(0);
@@ -52,8 +47,7 @@ public class DoppeltBuilderList2 {
         testedElements.add(nextElement);
 
         if (currentTupel.size() < size) {
-          Collection<Integer> nextTupel = buildNextTupel(size, tupels,
-              testedTupels, currentTupel);
+          Collection<Integer> nextTupel = buildNextTupel(size, tupels, testedTupels, currentTupel);
           if (testedTupels.contains(nextTupel)) {
             continue;
           }
@@ -72,8 +66,7 @@ public class DoppeltBuilderList2 {
     } while (true);
   }
 
-  private List<Integer> getRemainingElements(int size,
-      Collection<Collection<Integer>> tupels, Collection<Integer> currentTupel,
+  private List<Integer> getRemainingElements(int size, Collection<Collection<Integer>> tupels, Collection<Integer> currentTupel,
       Collection<Integer> testedElements) {
     Set<Integer> usedElements = getUsedElements(currentTupel, tupels);
     usedElements.addAll(testedElements);
@@ -82,8 +75,7 @@ public class DoppeltBuilderList2 {
     return allElements;
   }
 
-  private Set<Integer> getUsedElements(Collection<Integer> currentTupel,
-      Collection<Collection<Integer>> tupels) {
+  private Set<Integer> getUsedElements(Collection<Integer> currentTupel, Collection<Collection<Integer>> tupels) {
     Set<Integer> usedElements = new HashSet<Integer>();
     for (Integer element : currentTupel) {
       for (Collection<Integer> tupel : tupels) {

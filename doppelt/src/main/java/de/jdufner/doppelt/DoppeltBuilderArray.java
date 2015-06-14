@@ -7,13 +7,11 @@ public class DoppeltBuilderArray {
     int[][] feld = initializeFeld(size);
     int[] anzahlElemente = zaehleElemente(feld);
     int[] currentPosition = getFirstPositionContainingNull(feld);
-    int[][] filledFeld = addMissingTupels(counter, currentPosition, feld,
-        anzahlElemente);
+    int[][] filledFeld = addMissingTupels(counter, currentPosition, feld, anzahlElemente);
     return filledFeld;
   }
 
-  private int[][] addMissingTupels(int counter, int[] currentPosition,
-      int[][] feld, int[] anzahlElemente) {
+  private int[][] addMissingTupels(int counter, int[] currentPosition, int[][] feld, int[] anzahlElemente) {
     int nextElement = 0;
     nextElement = getNextElement(currentPosition, feld, anzahlElemente);
     if (nextElement == 0) {
@@ -23,8 +21,7 @@ public class DoppeltBuilderArray {
     return null;
   }
 
-  private int getNextElement(int[] currentPosition, int[][] feld,
-      int[] anzahlElemente) {
+  private int getNextElement(int[] currentPosition, int[][] feld, int[] anzahlElemente) {
     int nextElement = 0;
     if (currentPosition[0] == 0) {
       nextElement = getFirstElementOfNewLine(feld.length, anzahlElemente);
@@ -105,7 +102,7 @@ public class DoppeltBuilderArray {
     return size + (size - 1) * (size - 1);
   }
 
-  void print(int[][] feld) {
+  private void print(int[][] feld) {
     for (int j = 0; j < feld[0].length; j++) {
       for (int i = 0; i < feld.length; i++) {
         System.out.format("%3d", feld[i][j]);
@@ -114,7 +111,7 @@ public class DoppeltBuilderArray {
     }
   }
 
-  int[] zaehleElemente(int[][] feld) {
+  private int[] zaehleElemente(int[][] feld) {
     int[] anzahlElemente = new int[getAnzahlElements(feld.length) + 1];
     for (int j = 0; j < feld[0].length; j++) {
       for (int i = 0; i < feld.length; i++) {

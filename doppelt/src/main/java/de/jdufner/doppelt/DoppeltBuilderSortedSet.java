@@ -31,8 +31,7 @@ public class DoppeltBuilderSortedSet implements DoppeltBuilder {
     return oneByOneTupels;
   }
 
-  private boolean hasMoreThenOneLink(final Set<Integer> tupel,
-      final Set<Set<Integer>> oneByOneTupels) {
+  private boolean hasMoreThenOneLink(final Set<Integer> tupel, final Set<Set<Integer>> oneByOneTupels) {
     for (final Set<Integer> oneByOneTupel : oneByOneTupels) {
       final Collection<Integer> links = new HashSet<Integer>();
       for (final Integer element : tupel) {
