@@ -14,12 +14,51 @@ public class DoppeltBuilderArray {
 
   private int[][] addMissingTupels(int counter, int[] currentPosition,
       int[][] feld, int[] anzahlElemente) {
-    int nextElement = getFirstElementOfNewLine(feld.length, anzahlElemente);
+    int nextElement = 0;
+    nextElement = getNextElement(currentPosition, feld, anzahlElemente);
     if (nextElement == 0) {
       print(feld);
       return feld;
     }
     return null;
+  }
+
+  private int getNextElement(int[] currentPosition, int[][] feld,
+      int[] anzahlElemente) {
+    int nextElement = 0;
+    if (currentPosition[0] == 0) {
+      nextElement = getFirstElementOfNewLine(feld.length, anzahlElemente);
+    } else {
+      int[] linkedElemente = getLinkedElements(currentPosition, feld);
+      for (int i = 1; i <= linkedElemente.length; i++) {
+        if (linkedElemente[i] == 0) {
+          nextElement = i;
+        }
+      }
+    }
+    return nextElement;
+  }
+
+  private int[] getLinkedElements(int[] currentPosition, int[][] feld) {
+    int[] linkedElements = new int[feld[0].length + 1];
+    for (int i = 0; i < feld.length; i++) {
+      int element = feld[i][currentPosition[0]];
+      for (int k = 0; k < currentPosition[1]; k++) {
+        for (int j = 0; j < feld.length; j++) {
+          if (feld[j][k] == element) {
+            // alle Elemente aus Zeile in linkedElements hinzufügen
+            addLinkedElements(k, feld, linkedElements);
+          }
+        }
+      }
+    }
+    return linkedElements;
+  }
+
+  private void addLinkedElements(int k, int[][] feld, int[] linkedElements) {
+    for (int i = 0; i < feld.length; i++) {
+      linkedElements[feld[i][k]]++;
+    }
   }
 
   private int getFirstElementOfNewLine(int size, int[] anzahlElemente) {
