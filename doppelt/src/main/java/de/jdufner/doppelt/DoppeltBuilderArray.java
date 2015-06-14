@@ -17,14 +17,21 @@ public class DoppeltBuilderArray {
     if (nextElement == 0) {
       print(feld);
       return feld;
+    } else {
+      setNextElement(nextElement, currentPosition, feld, anzahlElemente);
     }
     return null;
   }
 
+  private void setNextElement(int nextElement, int[] currentPosition, int[][] feld, int[] anzahlElemente) {
+    feld[currentPosition[0]][currentPosition[1]] = nextElement;
+    anzahlElemente[nextElement]++;
+  }
+
   private int getNextElement(int[] currentPosition, int[][] feld, int[] anzahlElemente) {
     int nextElement = 0;
-    if (currentPosition[0] == 0) {
-      nextElement = getFirstElementOfNewLine(feld.length, anzahlElemente);
+    if (currentPosition[1] == 0) {
+      nextElement = getFirstElementOfNewLine(feld[0].length, anzahlElemente);
     } else {
       int[] linkedElemente = getLinkedElements(currentPosition, feld);
       for (int i = 1; i <= linkedElemente.length; i++) {
@@ -69,8 +76,8 @@ public class DoppeltBuilderArray {
 
   private int[] getFirstPositionContainingNull(int[][] feld) {
     int[] position = new int[2];
-    for (int j = 0; j < feld[0].length; j++) {
-      for (int i = 0; i < feld.length; i++) {
+    for (int i = 0; i < feld.length; i++) {
+      for (int j = 0; j < feld[0].length; j++) {
         if (feld[i][j] == 0) {
           position[0] = i;
           position[1] = j;
@@ -83,10 +90,10 @@ public class DoppeltBuilderArray {
 
   private int[][] initializeFeld(int size) {
     int k = 2;
-    int[][] feld = new int[size][getAnzahlElements(size)];
-    for (int j = 0; j < size; j++) {
-      for (int i = 0; i < size; i++) {
-        if (i == 0) {
+    int[][] feld = new int[getAnzahlElements(size)][size];
+    for (int i = 0; i < size; i++) {
+      for (int j = 0; j < size; j++) {
+        if (j == 0) {
           feld[i][j] = 1;
         } else {
           feld[i][j] = k;
@@ -103,8 +110,8 @@ public class DoppeltBuilderArray {
   }
 
   private void print(int[][] feld) {
-    for (int j = 0; j < feld[0].length; j++) {
-      for (int i = 0; i < feld.length; i++) {
+    for (int i = 0; i < feld.length; i++) {
+      for (int j = 0; j < feld[0].length; j++) {
         System.out.format("%3d", feld[i][j]);
       }
       System.out.println();
@@ -112,9 +119,9 @@ public class DoppeltBuilderArray {
   }
 
   private int[] zaehleElemente(int[][] feld) {
-    int[] anzahlElemente = new int[getAnzahlElements(feld.length) + 1];
-    for (int j = 0; j < feld[0].length; j++) {
-      for (int i = 0; i < feld.length; i++) {
+    int[] anzahlElemente = new int[getAnzahlElements(feld[0].length) + 1];
+    for (int i = 0; i < feld.length; i++) {
+      for (int j = 0; j < feld[0].length; j++) {
         anzahlElemente[feld[i][j]]++;
       }
     }
