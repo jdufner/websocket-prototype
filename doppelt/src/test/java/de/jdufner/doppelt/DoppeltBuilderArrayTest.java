@@ -14,7 +14,20 @@ public class DoppeltBuilderArrayTest {
 
   @Test
   public void build4() {
-    builder.build(4);
+    int[][] feld = builder.build(4);
+    DoppeltBuilderArray.print(feld);
+  }
+
+  @Test
+  public void build5() {
+    int[][] feld = builder.build(5);
+    DoppeltBuilderArray.print(feld);
+  }
+
+  @Test
+  public void build6() {
+    int[][] feld = builder.build(6);
+    DoppeltBuilderArray.print(feld);
   }
 
 }
