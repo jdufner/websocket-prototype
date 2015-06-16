@@ -188,21 +188,11 @@ public class DoppeltBuilderArray {
         }
       }
     }
-    // print(feld);
     return feld;
   }
 
   private int getAnzahlElements(int size) {
     return size + (size - 1) * (size - 1);
-  }
-
-  public static void print(int[][] feld) {
-    for (int i = 0; i < feld.length; i++) {
-      for (int j = 0; j < feld[0].length; j++) {
-        System.out.format("%3d", feld[i][j]);
-      }
-      System.out.println();
-    }
   }
 
   private int[] zaehleElemente(int[][] feld) {
@@ -213,6 +203,15 @@ public class DoppeltBuilderArray {
       }
     }
     return anzahlElemente;
+  }
+
+  public static void print(int[][] feld) {
+    for (int i = 0; i < feld.length; i++) {
+      for (int j = 0; j < feld[0].length; j++) {
+        System.out.format("%3d", feld[i][j]);
+      }
+      System.out.println();
+    }
   }
 
 }
