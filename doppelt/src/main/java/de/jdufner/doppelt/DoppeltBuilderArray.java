@@ -2,19 +2,19 @@ package de.jdufner.doppelt;
 
 public class DoppeltBuilderArray {
 
-  int counter = 0;
+  long counter = 0;
 
   public int[][] build(int size) {
     int[][] feld = initializeFeld(size);
     int[] anzahlElemente = zaehleElemente(feld);
     int[] currentPosition = getFirstPositionContainingNull(feld);
-    int[][] filledFeld = addMissingTupels(counter, currentPosition, feld, anzahlElemente);
+    int[][] filledFeld = addMissingTupels(currentPosition, feld, anzahlElemente);
     return filledFeld;
   }
 
-  private int[][] addMissingTupels(int counter, int[] currentPosition, int[][] feld, int[] anzahlElemente) {
+  private int[][] addMissingTupels(int[] currentPosition, int[][] feld, int[] anzahlElemente) {
     ++counter;
-    if (counter % 100 == 0) {
+    if (counter % 1000000 == 0) {
       print(feld);
     }
     int nextElement = 0;
@@ -25,7 +25,7 @@ public class DoppeltBuilderArray {
       nextElement = getNextElement(currentPosition, feld, anzahlElemente, testedElements);
       addElement(nextElement, testedElements);
       if (nextElement != 0) {
-        filledFeld = setNextElementAndCallAddMissingTupels(nextElement, counter, currentPosition.clone(), feld.clone(),
+        filledFeld = setNextElementAndCallAddMissingTupels(nextElement, currentPosition.clone(), feld.clone(),
             anzahlElemente.clone());
         if (filledFeld != null && filledFeld[filledFeld.length - 1][filledFeld[0].length - 1] != 0) {
           return filledFeld;
@@ -48,8 +48,7 @@ public class DoppeltBuilderArray {
     }
   }
 
-  private int[][] setNextElementAndCallAddMissingTupels(int nextElement, int counter, int[] currentPosition, int[][] feld,
-      int[] anzahlElemente) {
+  private int[][] setNextElementAndCallAddMissingTupels(int nextElement, int[] currentPosition, int[][] feld, int[] anzahlElemente) {
     int[][] filledField = null;
     feld[currentPosition[0]][currentPosition[1]] = nextElement;
     if (nextElement != 0 && currentPosition[0] == feld.length - 1 && currentPosition[1] == feld[0].length - 1) {
@@ -58,7 +57,7 @@ public class DoppeltBuilderArray {
     anzahlElemente[nextElement]++;
     incrementCurrentPosition(currentPosition, feld);
     if (currentPosition[0] < feld.length) {
-      filledField = addMissingTupels(counter, currentPosition, feld, anzahlElemente);
+      filledField = addMissingTupels(currentPosition, feld, anzahlElemente);
     }
     return filledField;
   }
@@ -75,7 +74,8 @@ public class DoppeltBuilderArray {
   private int getNextElement(int[] currentPosition, int[][] feld, int[] anzahlElemente, int[] testedElements) {
     int nextElement = 0;
     if (currentPosition[1] == 0) {
-      nextElement = getFirstElementOfNewLine(feld[0].length, anzahlElemente);
+      nextElement = getLowestElementNotIn(testedElements);
+      // nextElement = getRandomElementNotIn(testedElements);
     } else {
       int[] linkedElements = getLinkedElements(currentPosition, feld);
       for (int i = 0; i < testedElements.length; i++) {
@@ -93,6 +93,48 @@ public class DoppeltBuilderArray {
       }
     }
     return nextElement;
+  }
+
+  private int getLowestElementNotIn(int[] testedElements) {
+    for (int i = 1; i <= testedElements.length; i++) {
+      boolean found = false;
+      for (int j = 0; j < testedElements.length; j++) {
+        if (0 == testedElements[j]) {
+          break;
+        }
+        if (i == testedElements[j]) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        return i;
+      }
+    }
+    return 0;
+  }
+
+  private int getRandomElementNotIn(int[] testedElements) {
+    int index = 0;
+    int[] availableElements = new int[testedElements.length];
+    for (int i = 1; i <= testedElements.length; i++) {
+      boolean found = false;
+      for (int j = 0; j < testedElements.length; j++) {
+        if (0 == testedElements[j]) {
+          break;
+        }
+        if (i == testedElements[j]) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        availableElements[index] = i;
+        index++;
+      }
+    }
+    return availableElements[(int) (Math.random() * index)];
+    // return 0;
   }
 
   private int[] getLinkedElements(int[] currentPosition, int[][] feld) {
@@ -117,15 +159,6 @@ public class DoppeltBuilderArray {
     for (int i = 0; i < feld[0].length; i++) {
       linkedElements[feld[k][i]]++;
     }
-  }
-
-  private int getFirstElementOfNewLine(int size, int[] anzahlElemente) {
-    for (int i = 0; i < anzahlElemente.length; i++) {
-      if (anzahlElemente[i + 1] < size) {
-        return i + 1;
-      }
-    }
-    return 0;
   }
 
   private int[] getFirstPositionContainingNull(int[][] feld) {
