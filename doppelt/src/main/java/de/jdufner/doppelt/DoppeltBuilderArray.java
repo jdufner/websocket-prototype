@@ -75,7 +75,6 @@ public class DoppeltBuilderArray {
     int nextElement = 0;
     if (currentPosition[1] == 0) {
       nextElement = getLowestElementNotIn(testedElements);
-      // nextElement = getRandomElementNotIn(testedElements);
     } else {
       int[] linkedElements = getLinkedElements(currentPosition, feld);
       for (int i = 0; i < testedElements.length; i++) {
@@ -112,29 +111,6 @@ public class DoppeltBuilderArray {
       }
     }
     return 0;
-  }
-
-  private int getRandomElementNotIn(int[] testedElements) {
-    int index = 0;
-    int[] availableElements = new int[testedElements.length];
-    for (int i = 1; i <= testedElements.length; i++) {
-      boolean found = false;
-      for (int j = 0; j < testedElements.length; j++) {
-        if (0 == testedElements[j]) {
-          break;
-        }
-        if (i == testedElements[j]) {
-          found = true;
-          break;
-        }
-      }
-      if (!found) {
-        availableElements[index] = i;
-        index++;
-      }
-    }
-    return availableElements[(int) (Math.random() * index)];
-    // return 0;
   }
 
   private int[] getLinkedElements(int[] currentPosition, int[][] feld) {

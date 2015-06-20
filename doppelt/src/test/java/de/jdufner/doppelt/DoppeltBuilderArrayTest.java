@@ -30,4 +30,10 @@ public class DoppeltBuilderArrayTest {
     DoppeltBuilderArray.print(feld);
   }
 
+  @Test
+  public void build8() {
+    int[][] feld = builder.build(8);
+    DoppeltBuilderArray.print(feld);
+  }
+
 }
