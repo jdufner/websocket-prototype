@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class DoppeltBuilderSetTest {
 
-  private DoppeltBuilder builder = null;
+  private DoppeltBuilderSet builder = null;
 
   @Before
   public void setUp() {

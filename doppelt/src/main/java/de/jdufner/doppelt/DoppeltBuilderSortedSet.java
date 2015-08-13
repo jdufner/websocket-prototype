@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class DoppeltBuilderSortedSet implements DoppeltBuilder {
+public class DoppeltBuilderSortedSet {
 
   private int size = 0;
   private int anzahlElements = 0;

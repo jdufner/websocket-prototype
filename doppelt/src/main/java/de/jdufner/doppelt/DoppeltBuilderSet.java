@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DoppeltBuilderSet implements DoppeltBuilder {
+public class DoppeltBuilderSet {
 
   private int size = 0;
   private int anzahlElements = 0;

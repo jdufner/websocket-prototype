@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class DoppeltBuilderSortedSetTest {
 
-  private DoppeltBuilder builder = null;
+  private DoppeltBuilderSortedSet builder = null;
 
   @Before
   public void setUp() {
