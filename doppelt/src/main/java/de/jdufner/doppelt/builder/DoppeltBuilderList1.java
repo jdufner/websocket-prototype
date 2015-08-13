@@ -1,4 +1,4 @@
-package de.jdufner.doppelt;
+package de.jdufner.doppelt.builder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,51 +6,39 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class DoppeltBuilderList2 {
+public class DoppeltBuilderList1 {
 
   public Collection<Collection<Integer>> build(final int size) {
-    Collection<Collection<Integer>> initialTupels = buildInitial(size);
-    Collection<Collection<Integer>> buildTupels = addMissingTupels(size, initialTupels, new ArrayList<Collection<Integer>>());
-    return buildTupels;
+    Collection<Collection<Integer>> tupels = buildInitial(size);
+    tupels = addMissingTupels(size, tupels);
+    return tupels;
   }
 
-  private Collection<Collection<Integer>> addMissingTupels(int size, Collection<Collection<Integer>> initialTupels,
-      List<Collection<Integer>> buildTupels) {
-    Collection<Collection<Integer>> testedTupels = new ArrayList<Collection<Integer>>();
-    buildTupels.addAll(initialTupels);
-    do {
-      Collection<Integer> tupel = buildNextTupel(size, buildTupels, testedTupels, new ArrayList<Integer>());
-      if (tupel != null) {
-        buildTupels.add(tupel);
-        testedTupels.add(tupel);
-        if (buildTupels.size() == getAnzahlElements(size)) {
-          return buildTupels;
+  private Collection<Collection<Integer>> addMissingTupels(int size, Collection<Collection<Integer>> tupels) {
+    for (int i = 2; i <= size; i++) {
+      for (int j = 1; j < size; j++) {
+        Collection<Integer> tupel = buildNextTupel(size, tupels, new ArrayList<Integer>());
+        if (tupel != null) {
+          tupels.add(tupel);
         }
-      } else {
-        buildTupels.remove(buildTupels.size() - 1);
       }
-
-    } while (true);
-    // return buildTupels;
+    }
+    return tupels;
   }
 
-  private Collection<Integer> buildNextTupel(int size, Collection<Collection<Integer>> tupels,
-      Collection<Collection<Integer>> testedTupels, List<Integer> currentTupel) {
+  private Collection<Integer> buildNextTupel(int size, Collection<Collection<Integer>> tupels, List<Integer> currentTupel) {
     Collection<Integer> testedElements = new ArrayList<Integer>();
 
     do {
       List<Integer> remainingElements = getRemainingElements(size, tupels, currentTupel, testedElements);
       Integer nextElement = null;
       if (!remainingElements.isEmpty()) {
-        nextElement = remainingElements.get(0);
+        nextElement = getNextElement(size, remainingElements);
         currentTupel.add(nextElement);
         testedElements.add(nextElement);
 
         if (currentTupel.size() < size) {
-          Collection<Integer> nextTupel = buildNextTupel(size, tupels, testedTupels, currentTupel);
-          if (testedTupels.contains(nextTupel)) {
-            continue;
-          }
+          Collection<Integer> nextTupel = buildNextTupel(size, tupels, currentTupel);
           if (nextTupel == null) {
             currentTupel.remove(nextElement);
           } else {
@@ -64,6 +52,29 @@ public class DoppeltBuilderList2 {
         return null;
       }
     } while (true);
+  }
+
+  private Integer getNextElement(int size, List<Integer> remainingElements) {
+    return getNextElement2(size, remainingElements);
+  }
+
+  private Integer getNextElement1(int size, List<Integer> remainingElements) {
+    return remainingElements.get(0);
+  }
+
+  private Integer getNextElement2(int size, List<Integer> remainingElements) {
+    Integer nextElement;
+    if (remainingElements.size() >= size) {
+      nextElement = remainingElements.get(size - 1);
+    } else {
+      nextElement = remainingElements.get(0);
+    }
+    return nextElement;
+  }
+
+  private Integer getNextElement3(int size, List<Integer> remainingElements) {
+    int index = (int) (Math.random() * remainingElements.size());
+    return remainingElements.get(index);
   }
 
   private List<Integer> getRemainingElements(int size, Collection<Collection<Integer>> tupels, Collection<Integer> currentTupel,

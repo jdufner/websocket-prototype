@@ -1,32 +1,35 @@
-package de.jdufner.doppelt;
+package de.jdufner.doppelt.builder;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class DoppeltBuilderSetTest {
+import de.jdufner.doppelt.builder.DoppeltBuilderSortedSet;
 
-  private DoppeltBuilderSet builder = null;
+public class DoppeltBuilderSortedSetTest {
+
+  private DoppeltBuilderSortedSet builder = null;
 
   @Before
   public void setUp() {
-    builder = new DoppeltBuilderSet();
+    builder = new DoppeltBuilderSortedSet();
   }
 
   @Test
   public void whenBuild2Expect3Tupel() {
-    Set<Integer> tupel1 = new HashSet<Integer>();
+    Set<Integer> tupel1 = new TreeSet<Integer>();
     tupel1.add(1);
     tupel1.add(2);
-    Set<Integer> tupel2 = new HashSet<Integer>();
+    Set<Integer> tupel2 = new TreeSet<Integer>();
     tupel2.add(1);
     tupel2.add(3);
-    Set<Integer> tupel3 = new HashSet<Integer>();
+    Set<Integer> tupel3 = new TreeSet<Integer>();
     tupel3.add(2);
     tupel3.add(3);
     Set<Set<Integer>> tupels = new HashSet<Set<Integer>>();

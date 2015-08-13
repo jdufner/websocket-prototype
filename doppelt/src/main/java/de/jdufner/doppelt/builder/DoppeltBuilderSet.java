@@ -1,11 +1,10 @@
-package de.jdufner.doppelt;
+package de.jdufner.doppelt.builder;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
-public class DoppeltBuilderSortedSet {
+public class DoppeltBuilderSet {
 
   private int size = 0;
   private int anzahlElements = 0;
@@ -15,7 +14,7 @@ public class DoppeltBuilderSortedSet {
   public Set<Set<Integer>> build(final int size) {
     this.size = size;
     this.anzahlElements = size + (size - 1) * (size - 1);
-    buildTupel(1, new TreeSet<Integer>());
+    buildTupel(1, new HashSet<Integer>());
     return tupels;
   }
 
@@ -46,16 +45,16 @@ public class DoppeltBuilderSortedSet {
     return false;
   }
 
-  private void buildTupel(final int stacksize, final Set<Integer> sortedSet) {
+  private void buildTupel(final int stacksize, final Set<Integer> set) {
     for (int i = 1; i <= anzahlElements; i++) {
-      final Set<Integer> sortedSet2 = new TreeSet<Integer>(sortedSet);
-      if (sortedSet2.add(i)) {
+      final Set<Integer> set2 = new HashSet<Integer>(set);
+      if (set2.add(i)) {
         if (stacksize < size) {
-          buildTupel(stacksize + 1, sortedSet2);
+          buildTupel(stacksize + 1, set2);
         } else {
           // System.out.println(sortedSet2);
-          if (sortedSet2.size() == size) {
-            tupels.add(sortedSet2);
+          if (set2.size() == size) {
+            tupels.add(set2);
           }
         }
       }

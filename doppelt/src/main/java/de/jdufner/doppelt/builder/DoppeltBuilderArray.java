@@ -1,4 +1,4 @@
-package de.jdufner.doppelt;
+package de.jdufner.doppelt.builder;
 
 public class DoppeltBuilderArray {
 

@@ -1,7 +1,9 @@
-package de.jdufner.doppelt;
+package de.jdufner.doppelt.builder;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import de.jdufner.doppelt.builder.DoppeltBuilderArray;
 
 public class DoppeltBuilderArrayTest {
 
