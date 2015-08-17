@@ -1,4 +1,4 @@
-package de.jdufner.doppelt.rest;
+package de.jdufner.doppelt.domain;
 
 public class Greeting {
 
