@@ -3,12 +3,12 @@ package de.jdufner.doppelt.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
+import de.jdufner.doppelt.configuration.ApiController;
 import de.jdufner.doppelt.domain.Greeting;
 import de.jdufner.doppelt.service.GreetingService;
 
-@RestController
+@ApiController
 public class GreetingController {
 
   @Autowired
