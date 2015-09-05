@@ -10,7 +10,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 @Configuration
 public class Oauth2Configuration {
@@ -30,11 +29,6 @@ public class Oauth2Configuration {
         .access("#oauth2.hasScope('read')")
       ;
       // @formatter:on
-    }
-
-    @Override
-    public void configure(final ResourceServerSecurityConfigurer resources) throws Exception {
-      resources.resourceId("sparklr");
     }
 
   }
@@ -59,7 +53,6 @@ public class Oauth2Configuration {
                 .authorizedGrantTypes("client_credentials", "password")
                 .authorities("ROLE_CLIENT")
                 .scopes("read")
-                .resourceIds("sparklr")
                 .secret("secret")
       ;
     // @formatter:on
