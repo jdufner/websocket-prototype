@@ -49,11 +49,10 @@ public class Oauth2Configuration {
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
       // @formatter:off
       clients.inMemory()
-            .withClient("my-client-with-secret")
-                .authorizedGrantTypes("client_credentials", "password")
-                .authorities("ROLE_CLIENT")
-                .scopes("read")
-                .secret("secret")
+          .withClient("acme")
+          .secret("acmesecret")
+          .authorizedGrantTypes("client_credentials", "password")
+          .scopes("read")
       ;
     // @formatter:on
     }
