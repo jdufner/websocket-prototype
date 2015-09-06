@@ -51,7 +51,7 @@ public class Oauth2Configuration {
       clients.inMemory()
           .withClient("acme")
           .secret("acmesecret")
-          .authorizedGrantTypes("client_credentials", "password")
+          .authorizedGrantTypes("client_credentials")
           .scopes("read")
       ;
     // @formatter:on
