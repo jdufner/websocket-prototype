@@ -26,7 +26,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     clients.inMemory()
         .withClient("acme")
         .secret("acmesecret")
-        .authorizedGrantTypes("client_credentials")
+        .authorizedGrantTypes("client_credentials", "password", "refresh_token")
+        .accessTokenValiditySeconds(60) // default = 12 Stunden
+        .refreshTokenValiditySeconds(3600) // default = ???
         .scopes("read")
     ;
   // @formatter:on

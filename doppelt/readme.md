@@ -7,7 +7,15 @@ made by <http://patorjk.com/software/taag/#p=display&f=Graffiti&t=doppelt>
 
 ### Aufruf
  
-    curl http://acme:acmesecret@localhost:8080/oauth/token -H "Accept: application/json" -d grant_type=client_credentials
+    curl http://acme:acmesecret@localhost:8080/oauth/token -H "Accept: application/json" -d grant_type=password -d username=username -d password=password
+
+#### Client-Credentials
+
+Die Client-ID (acme) und das Client-Secret (acmesecret) sind im AuthorizationServer konfiguriert.
+
+#### Username und Password
+
+Der Benutzername (username) und das Passwort (password) sind in application.properties konfiguriert.
 
 #### CURL-Parameter
 * -d POST (HTTP)
@@ -22,7 +30,17 @@ made by <http://patorjk.com/software/taag/#p=display&f=Graffiti&t=doppelt>
 
 ### Rückgabe
 
-    {"access_token":"829d21e3-94f4-4bc7-b846-89b687ceeba1","token_type":"bearer","expires_in":43199,"scope":"read"}
+    {"access_token":"accdb825-9d99-4d33-9749-c097a4553706","token_type":"bearer","refresh_token":"d8990ea1-3656-4e94-8b9e-3d975df0255b","expires_in":59,"scope":"read"}
+    
+## Erneuerung des Tokens
+
+### Aufruf
+
+    curl http://acme:acmesecret@localhost:8080/oauth/token -H "Accept: application/json" -d grant_type=refresh_token -d refresh_token=d8990ea1-3656-4e94-8b9e-3d975df0255b
+    
+### Rückgabe
+
+    {"access_token":"2dc53b92-4fd1-43db-be66-e6cb1cc0b508","token_type":"bearer","refresh_token":"d8990ea1-3656-4e94-8b9e-3d975df0255b","expires_in":59,"scope":"read"}
 
 ## Greeting-Service mit Token aufrufen
 
