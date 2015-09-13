@@ -7,7 +7,7 @@ made by <http://patorjk.com/software/taag/#p=display&f=Graffiti&t=doppelt>
 
 ### Aufruf
  
-    curl http://acme:acmesecret@localhost:8080/oauth/token -H "Accept: application/json" -d grant_type=password -d username=username -d password=password
+    curl http://acme:acmesecret@localhost:8080/oauth/token -H "Accept: application/json" -d grant_type=password -d username=dave -d password=secret
 
 #### Client-Credentials
 
@@ -15,7 +15,7 @@ Die Client-ID (acme) und das Client-Secret (acmesecret) sind im AuthorizationSer
 
 #### Username und Password
 
-Der Benutzername (username) und das Passwort (password) sind in application.properties konfiguriert.
+Der Benutzername (dave) und das Passwort (secret) sind in nicht mehr application.properties konfiguriert, sondern in der AuthenticationManagerConfiguration.
 
 #### CURL-Parameter
 * -d POST (HTTP)
