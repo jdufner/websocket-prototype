@@ -39,11 +39,15 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
   @Configuration
   protected static class AuthenticationManagerConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
+    // @Autowired
+    // private DataSource dataSource;
+
     @Override
     public void init(final AuthenticationManagerBuilder auth) throws Exception {
       // @formatter:off
       auth.inMemoryAuthentication().withUser("dave")
           .password("secret").roles("USER");
+      //auth.jdbcAuthentication().dataSource(dataSource).
       // @formatter:on
     }
 

@@ -40,6 +40,23 @@
       <version>2.0.7.RELEASE</version>
     </dependency>
     <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <!--version>3.2.1</version -->
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.1-901-1.jdbc4</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
@@ -51,6 +68,27 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>3.2.1</version>
+        <configuration>
+          <driver>org.postgresql.Driver</driver>
+          <url>jdbc:postgresql://localhost:5432/postgres</url>
+          <!--user>postgres</user> <password>postgres</password -->
+          <user>doubleadmin</user>
+          <password>doubleadmin</password>
+          <!--user>doubleuser</user> <password>doubleuser</password -->
+          <schemas>
+            <schema>double</schema>
+          </schemas>
+          <!-- Table (default) -->
+          <!-- Locations (default) -->
+          <!-- SQL Migration Prefix / Separator / Suffix (default) -->
+          <!-- Encoding (default) -->
+          <!-- Target ??? -->
+        </configuration>
       </plugin>
     </plugins>
   </build>
