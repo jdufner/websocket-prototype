@@ -43,32 +43,24 @@
       <artifactId>spring-security-oauth2</artifactId>
       <version>2.0.7.RELEASE</version>
     </dependency>
-    <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-core</artifactId>
-      <!--version>3.2.1</version -->
-    </dependency>
 
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>9.4-1203-jdbc42</version>
+      <scope>run</scope>
     </dependency>
 
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
-      <!--version>2.3.3</version-->
+      <scope>run</scope>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-rest</artifactId>
     </dependency>
   </dependencies>
 
@@ -77,32 +69,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-maven-plugin</artifactId>
-        <version>3.2.1</version>
-        <configuration>
-          <driver>org.postgresql.Driver</driver>
-          <url>jdbc:postgresql://localhost:5432/postgres</url>
-          <!--user>postgres</user> <password>postgres</password -->
-          <user>doubleadmin</user>
-          <password>doubleadmin</password>
-          <!--user>doubleuser</user> <password>doubleuser</password -->
-          <schemas>
-            <schema>double</schema>
-          </schemas>
-          <!-- Table (default) -->
-          <!-- Locations (default) -->
-          <!-- SQL Migration Prefix / Separator / Suffix (default) -->
-          <!-- Encoding (default) -->
-          <placeholderReplacement>true</placeholderReplacement>
-          <placeholders>
-            <datatype.blob>BYTEA</datatype.blob>
-          </placeholders>
-          <!-- Wenn kein Target angegeben ist, dann wir auf die aktuellste Version migriert. -->
-          <!--target>1.0</target -->
-        </configuration>
       </plugin>
     </plugins>
   </build>
