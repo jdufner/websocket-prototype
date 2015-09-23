@@ -1,10 +1,13 @@
 package de.jdufner.doppelt.configuration;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -13,6 +16,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+
+  // @Autowired
+  // private DataSource dataSource;
 
   @Autowired
   private AuthenticationManager authenticationManager;
@@ -33,21 +39,28 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         .refreshTokenValiditySeconds(3600) // default = ???
         .scopes("read")
     ;
+//    clients.jdbc(dataSource).passwordEncoder(passwordEncoder)
   // @formatter:on
   }
 
   @Configuration
   protected static class AuthenticationManagerConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
-    // @Autowired
-    // private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void init(final AuthenticationManagerBuilder auth) throws Exception {
       // @formatter:off
-      auth.inMemoryAuthentication().withUser("dave")
-          .password("secret").roles("USER");
-      //auth.jdbcAuthentication().dataSource(dataSource).
+      auth.jdbcAuthentication()
+          .dataSource(dataSource)
+          .usersByUsernameQuery("select benu_name, benu_kennwort, true from benutzer where benu_name = ?")
+          .authoritiesByUsernameQuery("select bero_benu_name, bero_roll_name from benutzer_rollen where bero_benu_name = ?")
+          .passwordEncoder(passwordEncoder)
+      ;
       // @formatter:on
     }
 

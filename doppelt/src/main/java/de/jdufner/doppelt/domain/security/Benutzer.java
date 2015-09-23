@@ -16,10 +16,10 @@ import javax.persistence.Table;
 public class Benutzer {
 
   @Id
-  @Column(name = "benu_name", unique = true, nullable = false, length = 25)
+  @Column(name = "benu_name", unique = true, nullable = false, length = 256)
   private String name;
 
-  @Column(name = "benu_kennwort", nullable = false, length = 25)
+  @Column(name = "benu_kennwort", nullable = false, length = 256)
   private String kennwort;
 
   @ManyToMany
