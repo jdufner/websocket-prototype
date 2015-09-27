@@ -1,9 +1,8 @@
 package de.jdufner.doppelt.builder;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-
-import de.jdufner.doppelt.builder.DoppeltBuilderArray;
 
 public class DoppeltBuilderArrayTest {
 
@@ -27,12 +26,14 @@ public class DoppeltBuilderArrayTest {
   }
 
   @Test
+  @Ignore
   public void build6() {
     int[][] feld = builder.build(6);
     DoppeltBuilderArray.print(feld);
   }
 
   @Test
+  @Ignore
   public void build8() {
     int[][] feld = builder.build(8);
     DoppeltBuilderArray.print(feld);

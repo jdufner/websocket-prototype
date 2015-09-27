@@ -14,7 +14,7 @@ public class DoppeltBuilderList1 {
     return tupels;
   }
 
-  private Collection<Collection<Integer>> addMissingTupels(int size, Collection<Collection<Integer>> tupels) {
+  private Collection<Collection<Integer>> addMissingTupels(final int size, final Collection<Collection<Integer>> tupels) {
     for (int i = 2; i <= size; i++) {
       for (int j = 1; j < size; j++) {
         Collection<Integer> tupel = buildNextTupel(size, tupels, new ArrayList<Integer>());
@@ -26,7 +26,8 @@ public class DoppeltBuilderList1 {
     return tupels;
   }
 
-  private Collection<Integer> buildNextTupel(int size, Collection<Collection<Integer>> tupels, List<Integer> currentTupel) {
+  private Collection<Integer> buildNextTupel(final int size, final Collection<Collection<Integer>> tupels,
+      final List<Integer> currentTupel) {
     Collection<Integer> testedElements = new ArrayList<Integer>();
 
     do {
@@ -54,15 +55,15 @@ public class DoppeltBuilderList1 {
     } while (true);
   }
 
-  private Integer getNextElement(int size, List<Integer> remainingElements) {
+  private Integer getNextElement(final int size, final List<Integer> remainingElements) {
     return getNextElement2(size, remainingElements);
   }
 
-  private Integer getNextElement1(int size, List<Integer> remainingElements) {
-    return remainingElements.get(0);
-  }
+  //  private Integer getNextElement1(int size, List<Integer> remainingElements) {
+  //    return remainingElements.get(0);
+  //  }
 
-  private Integer getNextElement2(int size, List<Integer> remainingElements) {
+  private Integer getNextElement2(final int size, final List<Integer> remainingElements) {
     Integer nextElement;
     if (remainingElements.size() >= size) {
       nextElement = remainingElements.get(size - 1);
@@ -72,13 +73,13 @@ public class DoppeltBuilderList1 {
     return nextElement;
   }
 
-  private Integer getNextElement3(int size, List<Integer> remainingElements) {
-    int index = (int) (Math.random() * remainingElements.size());
-    return remainingElements.get(index);
-  }
+  //  private Integer getNextElement3(int size, List<Integer> remainingElements) {
+  //    int index = (int) (Math.random() * remainingElements.size());
+  //    return remainingElements.get(index);
+  //  }
 
-  private List<Integer> getRemainingElements(int size, Collection<Collection<Integer>> tupels, Collection<Integer> currentTupel,
-      Collection<Integer> testedElements) {
+  private List<Integer> getRemainingElements(final int size, final Collection<Collection<Integer>> tupels,
+      final Collection<Integer> currentTupel, final Collection<Integer> testedElements) {
     Set<Integer> usedElements = getUsedElements(currentTupel, tupels);
     usedElements.addAll(testedElements);
     List<Integer> allElements = allElements(size);
@@ -86,7 +87,7 @@ public class DoppeltBuilderList1 {
     return allElements;
   }
 
-  private Set<Integer> getUsedElements(Collection<Integer> currentTupel, Collection<Collection<Integer>> tupels) {
+  private Set<Integer> getUsedElements(final Collection<Integer> currentTupel, final Collection<Collection<Integer>> tupels) {
     Set<Integer> usedElements = new HashSet<Integer>();
     for (Integer element : currentTupel) {
       for (Collection<Integer> tupel : tupels) {
@@ -98,11 +99,11 @@ public class DoppeltBuilderList1 {
     return usedElements;
   }
 
-  private List<Integer> allElements(int size) {
+  private List<Integer> allElements(final int size) {
     return buildCollection(getAnzahlElements(size));
   }
 
-  private List<Integer> buildCollection(int size) {
+  private List<Integer> buildCollection(final int size) {
     List<Integer> allElements = new ArrayList<Integer>();
     for (int i = 1; i <= size; i++) {
       allElements.add(i);
@@ -110,7 +111,7 @@ public class DoppeltBuilderList1 {
     return allElements;
   }
 
-  private Collection<Collection<Integer>> buildInitial(int size) {
+  private Collection<Collection<Integer>> buildInitial(final int size) {
     Collection<Collection<Integer>> tupels = new ArrayList<Collection<Integer>>();
     Collection<Integer> tupel = new ArrayList<Integer>();
     for (int i = 2; i <= getAnzahlElements(size); i++) {
@@ -129,7 +130,7 @@ public class DoppeltBuilderList1 {
     return tupels;
   }
 
-  private int getAnzahlElements(int size) {
+  private int getAnzahlElements(final int size) {
     return size + (size - 1) * (size - 1);
   }
 

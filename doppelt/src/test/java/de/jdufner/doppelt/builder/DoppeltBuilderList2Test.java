@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import de.jdufner.doppelt.builder.DoppeltBuilderList2;
-
 public class DoppeltBuilderList2Test {
 
   private DoppeltBuilderList2 builder = null;
@@ -40,6 +38,7 @@ public class DoppeltBuilderList2Test {
   }
 
   @Test
+  @Ignore
   public void build6() {
     Collection<Collection<Integer>> listOfTupel = builder.build(6);
     System.out.println(listOfTupel);

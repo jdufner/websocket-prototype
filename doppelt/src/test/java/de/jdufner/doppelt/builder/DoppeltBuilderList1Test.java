@@ -5,9 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.Collection;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-
-import de.jdufner.doppelt.builder.DoppeltBuilderList1;
 
 public class DoppeltBuilderList1Test {
 
@@ -39,6 +38,7 @@ public class DoppeltBuilderList1Test {
   }
 
   @Test
+  @Ignore
   public void build6() {
     Collection<Collection<Integer>> listOfTupel = builder.build(6);
     System.out.println(listOfTupel);
@@ -46,6 +46,7 @@ public class DoppeltBuilderList1Test {
   }
 
   @Test
+  @Ignore
   public void build7() {
     Collection<Collection<Integer>> listOfTupel = builder.build(7);
     System.out.println(listOfTupel);
@@ -53,6 +54,7 @@ public class DoppeltBuilderList1Test {
   }
 
   @Test
+  @Ignore
   public void build8() {
     Collection<Collection<Integer>> listOfTupel = builder.build(8);
     System.out.println(listOfTupel);

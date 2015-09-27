@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import de.jdufner.doppelt.builder.DoppeltBuilderSet;
-
 public class DoppeltBuilderSetTest {
 
   private DoppeltBuilderSet builder = null;
@@ -58,12 +56,14 @@ public class DoppeltBuilderSetTest {
   }
 
   @Test
+  @Ignore
   public void build5() {
     Set<Set<Integer>> listOfTupel = builder.build(5);
     System.out.println(listOfTupel);
   }
 
   @Test
+  @Ignore
   public void reduce5() {
     Set<Set<Integer>> listOfTupel = builder.reduce(5);
     System.out.println(listOfTupel);
