@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 @Configuration
@@ -23,6 +24,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
   @Autowired
   private DataSource dataSource;
+
+  @Autowired
+  private JdbcTokenStore jdbcTokenStore;
+
+  @Autowired
+  private JdbcClientDetailsService jdbcClientDetailsService;
 
   @Autowired
   private AuthenticationManager authenticationManager;
@@ -63,22 +70,35 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
   @Override
   public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-    endpoints.authenticationManager(authenticationManager).tokenStore(tokenStore());
+    endpoints.authenticationManager(authenticationManager).tokenStore(jdbcTokenStore);
+  }
+
+  @Bean(name = "defaultJdbcClientDetailsService")
+  public JdbcClientDetailsService jdbcClientDetailsService() {
+    return new JdbcClientDetailsService(dataSource);
+  }
+
+  @Primary
+  @Bean
+  public JdbcClientDetailsService jdbcClientDetailsService(
+      final @Qualifier(value = "defaultJdbcClientDetailsService") JdbcClientDetailsService jdbcClientDetailsService) {
+    jdbcClientDetailsService.setDeleteClientDetailsSql("delete from oauth_client_details where ocld_client_id = ?");
+    jdbcClientDetailsService.setFindClientDetailsSql(
+        "select ocld_client_id, ocld_client_secret, ocld_resource_ids, ocld_scope, ocld_authorized_grant_types, ocld_web_server_redirect_uri, ocld_authorities, ocld_access_token_validity, ocld_refresh_token_validity, ocld_additional_information, ocld_autoapprove from oauth_client_details order by ocld_client_id");
+    jdbcClientDetailsService.setUpdateClientDetailsSql(
+        "update oauth_client_details set ocld_resource_ids = ?, ocld_scope = ?, ocld_authorized_grant_types = ?, ocld_web_server_redirect_uri = ?, ocld_authorities = ?, ocld_access_token_validity = ?, ocld_refresh_token_validity = ?, ocld_additional_information = ?, ocld_autoapprove=? where ocld_client_id = ?");
+    jdbcClientDetailsService
+        .setUpdateClientSecretSql("update oauth_client_details set ocld_client_secret = ? where ocld_client_id = ?");
+    jdbcClientDetailsService.setInsertClientDetailsSql(
+        "insert into oauth_client_details (ocld_client_secret, ocld_resource_ids, ocld_scope, ocld_authorized_grant_types, ocld_web_server_redirect_uri, ocld_authorities, ocld_access_token_validity, ocld_refresh_token_validity, ocld_additional_information, ocld_autoapprove, ocld_client_id) values (?,?,?,?,?,?,?,?,?,?,?)");
+    jdbcClientDetailsService.setSelectClientDetailsSql(
+        "select ocld_client_id, ocld_client_secret, ocld_resource_ids, ocld_scope, ocld_authorized_grant_types, ocld_web_server_redirect_uri, ocld_authorities, ocld_access_token_validity, ocld_refresh_token_validity, ocld_additional_information, ocld_autoapprove from oauth_client_details where ocld_client_id = ?");
+    return jdbcClientDetailsService;
   }
 
   @Override
   public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
-    // @formatter:off
-    clients.inMemory()
-        .withClient("acme")
-        .secret("acmesecret")
-        .authorizedGrantTypes("client_credentials", "password", "refresh_token")
-        .accessTokenValiditySeconds(60 * 60 * 12) // default = 12 Stunden
-        .refreshTokenValiditySeconds(60 * 60 * 24 * 30) // default = ???
-        .scopes("read")
-    ;
-//    clients.jdbc(dataSource).passwordEncoder(passwordEncoder)
-  // @formatter:on
+    clients.withClientDetails(jdbcClientDetailsService);
   }
 
   @Configuration

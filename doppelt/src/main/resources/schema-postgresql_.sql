@@ -53,44 +53,58 @@ INSERT INTO benutzer (benu_name, benu_kennwort)              VALUES ('matthias',
 /*
  * Lösche OAuth2-Tabellen, sofern sie existieren.
  */
-DROP TABLE oauth_client_details IF EXISTS;
-DROP TABLE oauth_access_token   IF EXISTS;
-DROP TABLE oauth_refresh_token  IF EXISTS;
+DROP TABLE IF EXISTS oauth_client_details;
+DROP TABLE IF EXISTS oauth_access_token  ;
+DROP TABLE IF EXISTS oauth_refresh_token ;
 
 /*
  * Lege OAuth2-Tabellen an.
  */
 CREATE TABLE oauth_client_details (
-  client_id               VARCHAR(256) PRIMARY KEY,
-  resource_ids            VARCHAR(256),
-  client_secret           VARCHAR(256),
-  scope                   VARCHAR(256),
-  authorized_grant_types  VARCHAR(256),
-  web_server_redirect_uri VARCHAR(256),
-  authorities             VARCHAR(256),
-  access_token_validity   INTEGER,
-  refresh_token_validity  INTEGER,
-  additional_information  VARCHAR(4096),
-  autoapprove             VARCHAR(256)
+  ocld_client_id               VARCHAR(256) PRIMARY KEY,
+  ocld_resource_ids            VARCHAR(256),
+  ocld_client_secret           VARCHAR(256),
+  ocld_scope                   VARCHAR(256),
+  ocld_authorized_grant_types  VARCHAR(256),
+  ocld_web_server_redirect_uri VARCHAR(256),
+  ocld_authorities             VARCHAR(256),
+  ocld_access_token_validity   INTEGER,
+  ocld_refresh_token_validity  INTEGER,
+  ocld_additional_information  VARCHAR(4096),
+  ocld_autoapprove             VARCHAR(256)
 );
 
 CREATE TABLE oauth_refresh_token (
-  oret_refresh_token_id  VARCHAR(256),
+  oret_refresh_token_id  VARCHAR(256) PRIMARY KEY,
   oret_token             BYTEA,
-  oret_authentication    BYTEA,
-  PRIMARY KEY (oret_refresh_token_id)
+  oret_authentication    BYTEA
 );
 
 CREATE TABLE oauth_access_token (
-  oact_access_token_id   VARCHAR(256),
+  oact_access_token_id   VARCHAR(256) PRIMARY KEY,
   oact_token             BYTEA,
   oact_authentication_id VARCHAR(256),
   oact_user_name         VARCHAR(256),
   oact_client_id         VARCHAR(256),
   oact_authentication    BYTEA,
-  oact_refresh_token_id  VARCHAR(256),
-  PRIMARY KEY (oact_access_token_id)
+  oact_refresh_token_id  VARCHAR(256)
 );
-CREATE UNIQUE INDEX oact_tuning_1 ON oauth_access_token(oact_access_token_id);
+CREATE UNIQUE INDEX oact_tuning_1 ON oauth_access_token(oact_authentication_id);
 CREATE UNIQUE INDEX oact_tuning_2 ON oauth_access_token(oact_user_name, oact_client_id);
-CREATE INDEX oacht_tuning_3 ON oauth_access_token(oact_refresh_token_id);
+CREATE        INDEX oact_tuning_3 ON oauth_access_token(oact_refresh_token_id);
+
+/*
+ *  Lege Minimalbefüllung an.
+ */
+DELETE FROM oauth_client_details;
+INSERT INTO oauth_client_details(
+  ocld_client_id, ocld_resource_ids, ocld_client_secret, 
+  ocld_scope, ocld_authorized_grant_types, ocld_web_server_redirect_uri, 
+  ocld_authorities, ocld_access_token_validity, ocld_refresh_token_validity, 
+  ocld_additional_information, ocld_autoapprove
+) VALUES (
+  'acme', NULL, 'acmesecret',
+  'read', 'client_credentials,password,refresh_token', NULL,
+  NULL, 60*60*24, 60*60*24*30,
+  NULL, NULL
+);

@@ -61,17 +61,17 @@ DROP TABLE oauth_refresh_token  IF EXISTS;
  * Lege OAuth2-Tabellen an.
  */
 CREATE TABLE oauth_client_details (
-  client_id               VARCHAR(256) PRIMARY KEY,
-  resource_ids            VARCHAR(256),
-  client_secret           VARCHAR(256),
-  scope                   VARCHAR(256),
-  authorized_grant_types  VARCHAR(256),
-  web_server_redirect_uri VARCHAR(256),
-  authorities             VARCHAR(256),
-  access_token_validity   INTEGER,
-  refresh_token_validity  INTEGER,
-  additional_information  VARCHAR(4096),
-  autoapprove             VARCHAR(256)
+  ocld_client_id               VARCHAR(256) PRIMARY KEY,
+  ocld_resource_ids            VARCHAR(256),
+  ocld_client_secret           VARCHAR(256),
+  ocld_scope                   VARCHAR(256),
+  ocld_authorized_grant_types  VARCHAR(256),
+  ocld_web_server_redirect_uri VARCHAR(256),
+  ocld_authorities             VARCHAR(256),
+  ocld_access_token_validity   INTEGER,
+  ocld_refresh_token_validity  INTEGER,
+  ocld_additional_information  VARCHAR(4096),
+  ocld_autoapprove             VARCHAR(256)
 );
 
 CREATE TABLE oauth_refresh_token (
@@ -93,4 +93,22 @@ CREATE TABLE oauth_access_token (
 );
 CREATE UNIQUE INDEX oact_tuning_1 ON oauth_access_token(oact_access_token_id);
 CREATE UNIQUE INDEX oact_tuning_2 ON oauth_access_token(oact_user_name, oact_client_id);
-CREATE INDEX oacht_tuning_3 ON oauth_access_token(oact_refresh_token_id);
+CREATE        INDEX oacht_tuning_3 ON oauth_access_token(oact_refresh_token_id);
+
+
+/*
+ *  Lege Minimalbefüllung an.
+ */
+DELETE FROM oauth_client_details;
+
+INSERT INTO oauth_client_details(
+  ocld_client_id, ocld_resource_ids, ocld_client_secret, 
+  ocld_scope, ocld_authorized_grant_types, ocld_web_server_redirect_uri, 
+  ocld_authorities, ocld_access_token_validity, ocld_refresh_token_validity, 
+  ocld_additional_information, ocld_autoapprove
+) VALUES (
+  'acme', NULL, 'acmesecret',
+  'read', 'client_credentials,password,refresh_token', NULL,
+  NULL, 60*60*24, 60*60*24*30,
+  NULL, NULL
+);
