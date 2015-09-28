@@ -55,3 +55,16 @@ Rückgabe
 ## Referenzen
 * <https://github.com/dsyer/sparklr-boot>
 * <https://raymondhlee.wordpress.com/2014/12/21/implementing-oauth2-with-spring-security/>
+
+# Programmierung
+
+## Remote-Debugging mit Maven
+
+Maven läuft in einem eigenen Programm. Debugging ist nur "remote" möglich. Der Befehl für Unit- und Componenttests lautet:
+
+    mvn -Dmaven.surefire.debug="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000 -Xnoagent -Djava.compiler=NONE" verify
+
+Der Befehl für API- und Integrationstests lautet:
+
+    mvn -Dmaven.failsafe.debug="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000 -Xnoagent -Djava.compiler=NONE" verify
+
