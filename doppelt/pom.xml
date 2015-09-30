@@ -17,7 +17,8 @@
 
   <scm>
     <url>scm:git:https://github.com/jdufner/double.git</url>
-    <developerConnection>Jürgen Dufner</developerConnection>
+    <developerConnection>scm:git:https://github.com/jdufner/double.git</developerConnection>
+    <connection>scm:git:https://github.com/jdufner/double.git</connection>
   </scm>
 
   <properties>
