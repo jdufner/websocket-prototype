@@ -70,5 +70,5 @@ Der Befehl für API- und Integrationstests lautet:
 
 ## Release mit Maven
 
-    mvn release:prepare
+    mvn -Dusername=jdufner release:prepare
 
