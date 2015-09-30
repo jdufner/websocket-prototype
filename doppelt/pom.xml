@@ -200,4 +200,7 @@
     </plugins>
   </reporting>
 
+  <organization>
+    <name>Jürgen Dufner</name>
+  </organization>
 </project>
