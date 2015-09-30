@@ -10,7 +10,7 @@
   <groupId>de.jdufner.doppelt</groupId>
   <artifactId>doppelt</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>doppelt</name>
   <url>https://github.com/jdufner/double</url>
 
@@ -18,7 +18,6 @@
     <url>https://github.com/jdufner/double.git</url>
     <connection>scm:git:git://github.com/jdufner/double.git</connection>
     <developerConnection>scm:git:git@github.com:jdufner/double.git</developerConnection>
-    <tag>doppelt-1.0.0</tag>
   </scm>
 
   <developers>
