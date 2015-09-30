@@ -68,3 +68,5 @@ Der Befehl für API- und Integrationstests lautet:
 
     mvn -Dmaven.failsafe.debug="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000 -Xnoagent -Djava.compiler=NONE" verify
 
+## Release mit Maven
+
