@@ -13,7 +13,12 @@
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>doppelt</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/jdufner/double</url>
+
+  <scm>
+    <url>scm:https://github.com/jdufner/double.git</url>
+    <developerConnection>Jürgen Dufner</developerConnection>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -110,6 +115,11 @@
             <include>**/*IT.java</include>
           </includes>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.2</version>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
