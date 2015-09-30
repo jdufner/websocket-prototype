@@ -16,7 +16,7 @@
   <url>https://github.com/jdufner/double</url>
 
   <scm>
-    <url>scm:https://github.com/jdufner/double.git</url>
+    <url>scm:git:https://github.com/jdufner/double.git</url>
     <developerConnection>Jürgen Dufner</developerConnection>
   </scm>
 
