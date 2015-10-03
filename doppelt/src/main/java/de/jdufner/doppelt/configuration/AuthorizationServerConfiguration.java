@@ -102,7 +102,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
   }
 
   @Configuration
-  protected static class AuthenticationManagerConfiguration extends GlobalAuthenticationConfigurerAdapter {
+  public static class AuthenticationManagerConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
