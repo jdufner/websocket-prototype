@@ -13,11 +13,16 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
   public void configure(final HttpSecurity http) throws Exception {
     // @formatter:off
     http
-      .requestMatchers().antMatchers("/api/**")
-      .and()
       .authorizeRequests()
-      .anyRequest()
-      .access("#oauth2.hasScope('read')")
+      .antMatchers("/manage/health/**").permitAll()
+      .antMatchers("/manage/**").hasAuthority("Admin")
+      .antMatchers("/api/**").hasAuthority("User")
+      .antMatchers("/ui/**").hasAuthority("User")
+//      .requestMatchers().antMatchers("/api/**")
+//      .and()
+//      .authorizeRequests()
+//      .anyRequest()
+//      .access("#oauth2.hasScope('read')")
     ;
     // @formatter:on
   }
