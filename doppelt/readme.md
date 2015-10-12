@@ -72,3 +72,11 @@ Der Befehl für API- und Integrationstests lautet:
 
     mvn -Dusername=jdufner release:prepare
 
+# TODO's
+
+* Berechtigungsgruppen
+* SpEL: hasPermission
+* WebSockets
+* Testabdeckung
+* Dokumentation
+
