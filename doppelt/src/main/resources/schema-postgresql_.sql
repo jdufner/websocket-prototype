@@ -46,6 +46,10 @@ INSERT INTO benutzer_rollen (bero_benu_name, bero_roll_name) VALUES ('juergen', 
 INSERT INTO benutzer (benu_name, benu_kennwort)              VALUES ('jens', '$2a$10$zzauz/riWWbHVjry/v2L1e7lWBcZv8bikynblVzmq5Vkuswd9ZHnq');
 INSERT INTO benutzer_rollen (bero_benu_name, bero_roll_name) VALUES ('jens', 'User');
 
+--INSERT INTO benutzer (benu_name, benu_kennwort)              VALUES ('thorsten', 'thorsten');
+INSERT INTO benutzer (benu_name, benu_kennwort)              VALUES ('thorsten', '$2a$10$xPSyHsmz0Nm9FAFljTsmjeKsKoLVO.61wfdF56KG1AEbTXKIaM5w.');
+INSERT INTO benutzer_rollen (bero_benu_name, bero_roll_name) VALUES ('thorsten', 'Admin');
+
 --INSERT INTO benutzer (benu_name, benu_kennwort)              VALUES ('matthias', 'matthias');
 INSERT INTO benutzer (benu_name, benu_kennwort)              VALUES ('matthias', '$2a$10$4yrcFL8peUsAwfIdMlwoq.iQ2JK3vTb2LxxZgcIVfrt9Br8v31E06');
 

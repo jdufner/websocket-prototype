@@ -31,6 +31,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Request;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -75,8 +76,24 @@ public class ResourceServerConfigurationTest {
   }
 
   @Test
-  public void whenPostOAuthTokenByClientCredentialsAndUsernamePasswordExpectToken() throws Exception {
+  public void whenPostOAuthTokenByClientCredentialsAndUsernamePasswordExpectToken1() throws Exception {
     getTokenAsJson("acme", "acmesecret", "juergen", "juergen");
+  }
+
+  @Test
+  public void whenPostOAuthTokenByClientCredentialsAndUsernamePasswordExpectToken2() throws Exception {
+    getTokenAsJson("acme", "acmesecret", "jens", "jens");
+  }
+
+  @Test
+  public void whenPostOAuthTokenByClientCredentialsAndUsernamePasswordExpectToken3() throws Exception {
+    getTokenAsJson("acme", "acmesecret", "thorsten", "thorsten");
+  }
+
+  @Test
+  @WithMockUser(username = "hans", password = "hans", authorities = { "User" })
+  public void whenPostOAuthTokenByClientCredentialsAndUsernamePasswordExpectToken4() throws Exception {
+    getTokenAsJson("acme", "acmesecret", "hans", "hans");
   }
 
   @Test
@@ -117,6 +134,26 @@ public class ResourceServerConfigurationTest {
         .andExpect(content().string(containsString("Hello, World!")))
         .andReturn()
             .getResponse().getContentAsString();
+    // @formatter:on
+  }
+
+  @Test
+  public void whenGetApiGretingExpectDenied() throws Exception {
+    String token = getToken(getTokenAsJson("acme", "acmesecret", "thorsten", "thorsten"), TokenGroup.ACCESS_TOKEN);
+    String contentType = MediaType.APPLICATION_JSON + ";charset=UTF-8";
+    // @formatter:off
+    mockMvc
+    .perform(
+        get("/api/greeting")
+        .header("Authorization", "Bearer " + token)
+        .contentType(MediaType.APPLICATION_JSON))
+    .andDo(MockMvcResultHandlers.print())
+    .andExpect(status().isForbidden())
+    .andExpect(content().contentType(contentType))
+    .andExpect(jsonPath("$.error", is(equalTo("access_denied"))))
+    .andExpect(jsonPath("$.error_description", is(equalTo("Zugriff verweigert"))))
+    .andReturn()
+    .getResponse().getContentAsString();
     // @formatter:on
   }
 

@@ -23,4 +23,10 @@ public class SecurityConfigurationTest {
     assertThat(passwordEncoder.matches(rawPassword, encodedPassword));
   }
 
+  @Test
+  public void testEncodePassword() {
+    String rawPassword = "thorsten";
+    System.out.println(passwordEncoder.encode(rawPassword));
+  }
+
 }
