@@ -15,14 +15,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     http
       .authorizeRequests()
       .antMatchers("/manage/health/**").permitAll()
-      .antMatchers("/manage/**").hasAuthority("Admin")
-      .antMatchers("/api/**").hasAuthority("User")
-      .antMatchers("/ui/**").hasAuthority("User")
-//      .requestMatchers().antMatchers("/api/**")
-//      .and()
-//      .authorizeRequests()
-//      .anyRequest()
-//      .access("#oauth2.hasScope('read')")
+      .antMatchers("/manage/**").permitAll()//.hasAuthority("Admin")
+      .antMatchers("/api/**").permitAll()//.hasAuthority("User")
+      .antMatchers("/ui/**").permitAll()//.hasAuthority("User")
     ;
     // @formatter:on
   }
