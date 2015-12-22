@@ -8,24 +8,30 @@ angular.module('doppelt.communicationService', ['ngResource'])
   var stompClient;
   
   function connect() {
-    var socket = new SockJS('/hello');
+    var options = {
+        debug: false
+      };
+    var socket = new SockJS('/hello', undefined, options);
     stompClient = Stomp.over(socket);
     var headers = {
-      login: 'myLogin',
-      passcode: 'myPasscode',
-      // additional header
-      'client-id': 'myClientId'
+      login: 'mylogin',
+      passcode: 'mypasscode',
+      'client-id': 'my-client-id',
+      'heart-beat': '25000, 25000'
     };
     
     function onConnect(frame) {
-      console.log('Connected: ' + frame);
+      //console.log('Connected: ' + frame);
       stompClient.subscribe('/topic/greetings', receive);
     };
     
     function onConnectError(error) {
-      console.log('Connectionerror: ' + error);
+      //console.log('Connectionerror: ' + error);
     };
     
+    stompClient.heartbeat.outgoing = 25000;
+    stompClient.heartbeat.incoming = 25000;
+    stompClient.debug = null;
     stompClient.connect('', '', onConnect, onConnectError);
   }
   
@@ -44,14 +50,19 @@ angular.module('doppelt.communicationService', ['ngResource'])
   
   function receive(greeting) {
     var message = JSON.parse(greeting.body).content;
-    console.log(message);
+    //console.log(message);
     listener.notify(message);
+  }
+  
+  function promise() {
+    return listener.promise;
   }
   
   return {
     connect: connect,
     disconnect: disconnect,
-    send: send
+    send: send,
+    listener: promise
   }
   
 }]);
