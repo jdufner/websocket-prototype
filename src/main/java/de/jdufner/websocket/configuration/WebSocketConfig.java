@@ -1,4 +1,4 @@
-package de.jdufner.doppelt.configuration;
+package de.jdufner.websocket.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

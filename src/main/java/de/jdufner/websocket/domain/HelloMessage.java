@@ -1,4 +1,4 @@
-package de.jdufner.doppelt.domain;
+package de.jdufner.websocket.domain;
 
 public class HelloMessage {
 

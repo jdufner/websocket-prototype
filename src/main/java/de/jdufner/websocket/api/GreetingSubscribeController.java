@@ -1,13 +1,13 @@
-package de.jdufner.doppelt.api;
+package de.jdufner.websocket.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import de.jdufner.doppelt.domain.Greeting;
-import de.jdufner.doppelt.domain.HelloMessage;
-import de.jdufner.doppelt.service.GreetingService;
+import de.jdufner.websocket.domain.Greeting;
+import de.jdufner.websocket.domain.HelloMessage;
+import de.jdufner.websocket.service.GreetingService;
 
 @Controller
 public class GreetingSubscribeController {

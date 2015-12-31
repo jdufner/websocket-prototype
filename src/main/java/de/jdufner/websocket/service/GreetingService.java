@@ -1,10 +1,10 @@
-package de.jdufner.doppelt.service;
+package de.jdufner.websocket.service;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
 
-import de.jdufner.doppelt.domain.Greeting;
+import de.jdufner.websocket.domain.Greeting;
 
 @Service
 public class GreetingService {

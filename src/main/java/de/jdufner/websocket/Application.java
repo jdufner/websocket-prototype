@@ -1,4 +1,4 @@
-package de.jdufner.doppelt;
+package de.jdufner.websocket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

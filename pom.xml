@@ -8,17 +8,17 @@
     <version>1.3.1.RELEASE</version>
   </parent>
 
-  <groupId>de.jdufner.doppelt</groupId>
-  <artifactId>doppelt</artifactId>
+  <groupId>de.jdufner.websocket</groupId>
+  <artifactId>websocket-prototype</artifactId>
   <packaging>jar</packaging>
   <version>1.0.1-SNAPSHOT</version>
-  <name>doppelt</name>
-  <url>https://github.com/jdufner/double</url>
+  <name>websocket-prototype</name>
+  <url>https://github.com/jdufner/websocket-prototype</url>
 
   <scm>
-    <url>https://github.com/jdufner/double.git</url>
-    <connection>scm:git:git://github.com/jdufner/double.git</connection>
-    <developerConnection>scm:git:git@github.com:jdufner/double.git</developerConnection>
+    <url>https://github.com/jdufner/websocket-prototype.git</url>
+    <connection>scm:git:git://github.com/jdufner/websocket-prototype.git</connection>
+    <developerConnection>scm:git:git@github.com:jdufner/websocket-prototype.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 

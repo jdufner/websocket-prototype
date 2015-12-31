@@ -1,4 +1,4 @@
-package de.jdufner.doppelt.configuration;
+package de.jdufner.websocket.configuration;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

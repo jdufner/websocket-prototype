@@ -1,4 +1,4 @@
-package de.jdufner.doppelt.service;
+package de.jdufner.websocket.service;
 
 import org.junit.Test;
 

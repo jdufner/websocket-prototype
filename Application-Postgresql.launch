@@ -6,7 +6,7 @@
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="de.jdufner.doppelt.Application"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="de.jdufner.websocket.Application"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="doppelt"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dspring.profiles.active=postgresql"/>
 <stringAttribute key="process_factory_id" value="org.springframework.ide.eclipse.boot.launch.process.BootProcessFactory"/>

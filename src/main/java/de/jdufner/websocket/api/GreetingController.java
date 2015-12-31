@@ -1,12 +1,12 @@
-package de.jdufner.doppelt.api;
+package de.jdufner.websocket.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import de.jdufner.doppelt.configuration.ApiController;
-import de.jdufner.doppelt.domain.Greeting;
-import de.jdufner.doppelt.service.GreetingService;
+import de.jdufner.websocket.configuration.ApiController;
+import de.jdufner.websocket.domain.Greeting;
+import de.jdufner.websocket.service.GreetingService;
 
 @ApiController
 public class GreetingController {
