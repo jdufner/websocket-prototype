@@ -12,10 +12,16 @@ angular.module('doppelt.welcome', ['ngRoute', 'doppelt.communicationService'])
 .controller('WelcomeCtrl', ['$scope', '$location', 'Communication', function($scope, $location, Communication) {
   var messageListElement = angular.element(document.querySelector('#messageList'));
   
-  $scope.test = 'Hello World!';
+  $scope.connected = false;
+  $scope.connectBtnState = false;
+  $scope.sendBtnState = true;
+  $scope.disconnectBtnState = true;
+  $scope.messageInputState = true;
+  //$scope.disconnect();
   
   $scope.onConnect = function() {
     Communication.connect();
+    $scope.connect();
     Communication.listener().then(
       function(message){
         //console.log('Success:' + message);
@@ -25,17 +31,35 @@ angular.module('doppelt.welcome', ['ngRoute', 'doppelt.communicationService'])
       },
       function(update) {
         //console.log('Update: ' + update);
-        messageListElement.append('<p>' + update + '</p>');
+        messageListElement.append('<div class="panel panel-default"><div class="panel-body"><span class="badge">' + update.id + '</span>' + update.content + '</div></div>');
       }
     );
   };
   
   $scope.onSend = function() {
-    Communication.send('xyz');
+    Communication.send($scope.message);
+    $scope.message = null;
   };
   
   $scope.onDisconnect = function() {
     Communication.disconnect();
+    $scope.disconnect();
   };
+
+  $scope.connect = function() {
+    $scope.connected = true;
+    $scope.connectBtnState = true;
+    $scope.sendBtnState = false;
+    $scope.disconnectBtnState = false;
+    $scope.messageInputState = false;
+  }
+  
+  $scope.disconnect = function() {
+    $scope.connected = false;
+    $scope.connectBtnState = false;
+    $scope.sendBtnState = true;
+    $scope.disconnectBtnState = true;
+    $scope.messageInputState = true;
+  }
   
 }]);

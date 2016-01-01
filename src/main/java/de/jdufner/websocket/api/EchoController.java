@@ -5,18 +5,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import de.jdufner.websocket.configuration.ApiController;
-import de.jdufner.websocket.domain.Greeting;
-import de.jdufner.websocket.service.GreetingService;
+import de.jdufner.websocket.domain.Message;
+import de.jdufner.websocket.service.EchoService;
 
 @ApiController
-public class GreetingController {
+public class EchoController {
 
   @Autowired
-  private GreetingService greetingService;
+  private EchoService echoService;
 
   @RequestMapping("/greeting")
-  public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") final String name) {
-    return greetingService.greets(name);
+  public Message greeting(@RequestParam(value = "name", defaultValue = "World") final String name) {
+    return echoService.echo(name);
   }
 
 }

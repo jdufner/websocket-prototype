@@ -44,12 +44,11 @@ angular.module('doppelt.communicationService', ['ngResource'])
   
   function send(message) {
     var headers = {};
-    
-    stompClient.send('/app/hello', headers, JSON.stringify({'name': message}));
+    stompClient.send('/app/hello', headers, JSON.stringify({'content': message}));
   }
   
-  function receive(greeting) {
-    var message = JSON.parse(greeting.body).content;
+  function receive(stompMessage) {
+    var message = JSON.parse(stompMessage.body);
     //console.log(message);
     listener.notify(message);
   }

@@ -5,21 +5,20 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import de.jdufner.websocket.domain.Greeting;
-import de.jdufner.websocket.domain.HelloMessage;
-import de.jdufner.websocket.service.GreetingService;
+import de.jdufner.websocket.domain.Message;
+import de.jdufner.websocket.service.EchoService;
 
 @Controller
-public class GreetingSubscribeController {
+public class EchoSubscribeController {
 
   @Autowired
-  private GreetingService greetingService;
+  private EchoService echoService;
 
   @MessageMapping("/hello")
   @SendTo("/topic/greetings")
-  public Greeting greeting(final HelloMessage message) throws Exception {
+  public Message echo(final Message message) throws Exception {
     Thread.sleep(3000); // simulated delay
-    return greetingService.greets(message.getName());
+    return echoService.echo(message.getContent());
   }
 
 }

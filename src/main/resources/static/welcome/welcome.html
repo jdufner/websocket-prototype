@@ -1,22 +1,49 @@
 <div class="row">
-  <div class="col-md-12">
-    <h1>Doppelt<br><small>Prototype</small></h1>
-    <p>{{ test }}</p>
+  <div class="col-xs-12">
+    <h1>Websocket<br><small>Prototype</small></h1>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-3">
-    <button type="button" class="btn btn-lg" ng-click="onConnect()">Connect</button>
+  <div class="col-xs-3">
+    <button id="connectBtn" type="button" class="btn btn-lg" ng-click="onConnect()" ng-disabled="connectBtnState">
+      <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+      Connect
+    </button>
   </div>
-  <div class="col-md-3">
-    <button type="button" class="btn btn-primary btn-lg" ng-click="onSend()">Send</button>
+  <div class="col-xs-3">
+    <button id="sendBtn" type="button" class="btn btn-primary btn-lg" ng-click="onSend()" ng-disabled="sendBtnState">
+      <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+      Send
+    </button>
   </div>
-  <div class="col-md-3">
-    <button type="button" class="btn btn-lg" ng-click="onDisconnect()">Disconnect</button>
+  <div class="col-xs-3">
+    <button id="disconnectBtn" type="button" class="btn btn-lg" ng-click="onDisconnect()" ng-disabled="disconnectBtnState">
+      <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+      Disconnect
+    </button>
+  </div>
+  <div class="col-xs-3">
+    <div class="alert alert-success" role="alert" ng-show="connected">
+      <span class="glyphicon glyphicon-resize-small" aria-hidden="true"></span>
+      Connected
+    </div>
+    <div class="alert alert-danger" role="alert" ng-hide="connected">
+      <span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+      Disconnected
+    </div>
   </div>
 </div>
 
 <div class="row">
-  <div id="messageList" class="col-md-1"></div>
+  <div class="col-xs-12 form-group">
+    <label for="message">Message</label>
+    <input type="text" class="form-control" id="message" placeholder="Message" ng-model="message" ng-disabled="messageInputState">
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div id="messageList" class="col-xs-12 pre-scrollable"></div>
 </div>

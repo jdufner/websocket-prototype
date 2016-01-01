@@ -2,3 +2,5 @@
 .project
 .settings
 /target/
+**/bower_components/**
+**/node_modules/**
