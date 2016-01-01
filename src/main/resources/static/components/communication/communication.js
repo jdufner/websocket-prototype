@@ -4,10 +4,11 @@ angular.module('doppelt.communicationService', ['ngResource'])
 
 .factory('Communication', ['$q', function($q){
   
-  var listener = $q.defer();
+  var listener;
   var stompClient;
   
   function connect() {
+    listener = $q.defer();
     var options = {
         debug: false
       };
@@ -38,8 +39,10 @@ angular.module('doppelt.communicationService', ['ngResource'])
   function disconnect() {
     if (stompClient != null) {
       stompClient.disconnect();
+      stompClient = null;
+      listener = null;
     }
-    console.log('Disconnected!');
+    //console.log('Disconnected!');
   }
   
   function send(message) {

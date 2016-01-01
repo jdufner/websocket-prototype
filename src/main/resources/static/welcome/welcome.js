@@ -9,7 +9,8 @@ angular.module('doppelt.welcome', ['ngRoute', 'doppelt.communicationService'])
   });
 }])
 
-.controller('WelcomeCtrl', ['$scope', '$location', 'Communication', function($scope, $location, Communication) {
+.controller('WelcomeCtrl', ['$scope', '$location', '$anchorScroll', 'Communication', 
+                            function($scope, $location, $anchorScroll, Communication) {
   var messageListElement = angular.element(document.querySelector('#messageList'));
   
   $scope.onConnect = function() {
@@ -24,7 +25,8 @@ angular.module('doppelt.welcome', ['ngRoute', 'doppelt.communicationService'])
       },
       function(update) {
         //console.log('Update: ' + update);
-        messageListElement.append('<div class="panel panel-default"><div class="panel-body"><span class="badge">' + update.id + '</span>' + update.content + '</div></div>');
+        messageListElement.append('<div id="panel_' + update.id + '" class="panel panel-default"><div class="panel-body"><span class="badge">' + update.id + '</span>' + update.content + '</div></div>');
+        $anchorScroll('panel_' + update.id);
       }
     );
   };
