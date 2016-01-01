@@ -12,13 +12,6 @@ angular.module('doppelt.welcome', ['ngRoute', 'doppelt.communicationService'])
 .controller('WelcomeCtrl', ['$scope', '$location', 'Communication', function($scope, $location, Communication) {
   var messageListElement = angular.element(document.querySelector('#messageList'));
   
-  $scope.connected = false;
-  $scope.connectBtnState = false;
-  $scope.sendBtnState = true;
-  $scope.disconnectBtnState = true;
-  $scope.messageInputState = true;
-  //$scope.disconnect();
-  
   $scope.onConnect = function() {
     Communication.connect();
     $scope.connect();
@@ -61,5 +54,7 @@ angular.module('doppelt.welcome', ['ngRoute', 'doppelt.communicationService'])
     $scope.disconnectBtnState = true;
     $scope.messageInputState = true;
   }
+  
+  $scope.disconnect();
   
 }]);
